@@ -1,0 +1,25 @@
+{
+  "name": "SelfHelp",
+  "version": "0.0.0",
+  "authors": [
+    "Patil",
+    "Mangauda <abhay.patil@pearson.com>"
+  ],
+  "description": "Fun JavaScript Implementations",
+  "main": "index.html",
+  "moduleType": [
+    "amd",
+    "es6",
+    "globals",
+    "node",
+    "yui"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
