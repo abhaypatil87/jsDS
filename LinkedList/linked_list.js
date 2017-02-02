@@ -1,50 +1,60 @@
 /**
  * Created by abhaypatil on 9/12/14.
  */
-function linkedList(init) {
 
-    var Node = function(value) {
-        this.next_node = null;
-        this.value = value;
+function LinkedList() {
+    this._length = 0;
+    this._head = null;
+
+    this.getHead = function() {
+        return this._head;
     };
+}
 
-    var head = new Node(init);
+LinkedList.prototype = {
+    addNode: function (value) {
+        //create a new node, place data in
+        var node = {
+            value: value,
+            nextNode: null
+        };
 
-    this.addNode = function(value) {
+        var current = null;
 
-        var node = new Node(value);
-        var temp = head;
-        while(head.next_node != null) {
-            head = head.next_node;
+        if (this._head === null){
+            this._head = node;
+        } else {
+            current = this._head;
+            while(current.nextNode){
+                current = current.nextNode;
+            }
+            current.nextNode = node;
         }
-        head.next_node = node;
-        head = temp;
-    };
 
-    this.traverse = function() {
-        var temp = head;
-        while(head != null) {
+        this._length++;
+    },
+
+    traverse: function() {
+        var temp = this._head;
+        var head = this._head;
+        while(head !== null) {
             console.log(head.value);
-            head = head.next_node;
+            head = head.nextNode;
         }
-        head = temp;
-    };
+        this._head = temp;
+    },
 
-    this.removeNode = function(value) {
-        var current, previous;
-        previous = null;
-        for(current = head; current != null; previous = current, current = current.next_node) {
-            if(current.value == value) {
-                if(previous == null) {
+    removeNode: function(value) {
+        var current = this._head,
+            previous = null;
+        for( ;current !== null; previous = current, current = current.next_node) {
+            if (current.value === value) {
+                if (previous === null) {
                     head = current.next_node;
                 } else {
                     previous.next_node = current.next_node;
                 }
             }
         }
-    };
-
-    this.getRoot = function() {
-        return head;
     }
-}
+};
