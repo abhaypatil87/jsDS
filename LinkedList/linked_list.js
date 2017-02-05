@@ -2,30 +2,47 @@
  * Created by abhaypatil on 9/12/14.
  */
 
-function LinkedList() {
+var LinkedList = function() {
     this._length = 0;
-    this._head = null;
+    var _head = null;
+    var that = this;
 
     this.getHead = function() {
-        return this._head;
+        return _head;
     };
+
+    this.setHead = function (head) {
+      _head = head;
+    }
+
+    if (arguments.length > 0) {
+      if (Array.isArray(arguments[0])) {
+        arguments[0].forEach(function (argument) {
+          that.addNode(argument);
+        });
+      } else {
+
+      }
+    }
 }
 
 LinkedList.prototype = {
+  /*
+   *
+   */
     addNode: function (value) {
-        //create a new node, place data in
         var node = {
             value: value,
             nextNode: null
         };
 
         var current = null;
-
-        if (this._head === null){
-            this._head = node;
+        var head = this.getHead();
+        if (head === null) {
+            this.setHead(node);
         } else {
-            current = this._head;
-            while(current.nextNode){
+            current = this.getHead();
+            while (current.nextNode) {
                 current = current.nextNode;
             }
             current.nextNode = node;
@@ -35,16 +52,16 @@ LinkedList.prototype = {
     },
 
     traverse: function() {
-        var temp = this._head;
-        var head = this._head;
+        var temp = this.getHead(),
+            head = this.getHead();
         while(head !== null) {
             console.log(head.value);
             head = head.nextNode;
         }
-        this._head = temp;
+        this.setHead(temp);
     },
 
-    removeNode: function(value) {
+    /*removeNode: function(value) {
         var current = this._head,
             previous = null;
         for( ;current !== null; previous = current, current = current.next_node) {
@@ -56,5 +73,7 @@ LinkedList.prototype = {
                 }
             }
         }
-    }
+    }*/
 };
+
+module.exports = LinkedList;

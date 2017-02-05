@@ -1,7 +1,7 @@
 /**
  * Created by abhaypatil on 9/12/14.
  */
-function linkedList(init) {
+function binarySearchTree(init) {
 
     /*
      * Note: Node has been declared with var so it's a private variable now.
