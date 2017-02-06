@@ -15,14 +15,19 @@ var LinkedList = function() {
       _head = head;
     }
 
-    if (arguments.length > 0) {
+    if (arguments.length === 1) {
       if (Array.isArray(arguments[0])) {
-        arguments[0].forEach(function (argument) {
+        var flattened = arguments[0].reduce(function(first, second) {
+          return first.concat(second);
+        }, []);
+        flattened.forEach(function (argument) {
           that.addNode(argument);
         });
       } else {
-
+        throw new TypeError("The argument needs to be an array.", "linked_list.js");
       }
+    } else {
+      throw new TypeError("Only one argument is allowed, of type array.", "linked_list.js");
     }
 }
 
@@ -31,6 +36,9 @@ LinkedList.prototype = {
    *
    */
     addNode: function (value) {
+      if (value === undefined || value === null ) {
+        throw new TypeError("Found undefined or null type value.", "[addNode]linked_list.js");
+      }
         var node = {
             value: value,
             nextNode: null
@@ -61,19 +69,19 @@ LinkedList.prototype = {
         this.setHead(temp);
     },
 
-    /*removeNode: function(value) {
-        var current = this._head,
+    removeNode: function(value) {
+        var current = this.getHead(),
             previous = null;
-        for( ;current !== null; previous = current, current = current.next_node) {
+        for( ;current !== null; previous = current, current = current.nextNode) {
             if (current.value === value) {
                 if (previous === null) {
-                    head = current.next_node;
+                    head = current.nextNode;
                 } else {
-                    previous.next_node = current.next_node;
+                    previous.nextNode = current.nextNode;
                 }
             }
         }
-    }*/
+    }
 };
 
 module.exports = LinkedList;

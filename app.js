@@ -16,3 +16,10 @@ list.addNode("Abhay");
 
 /* Print the lniked list */
 list.traverse();
+
+/* Remove a node */
+list.removeNode("Abhay");
+list.removeNode("Sunnyvale");
+
+console.log("--------");
+list.traverse();
