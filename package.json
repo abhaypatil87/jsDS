@@ -1,0 +1,22 @@
+{
+  "name": "jsds",
+  "version": "1.0.0",
+  "description": "An approach towards implementing, and understading data structures while implementing through the lens of JavaScript",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/abhaypatil87/jsDS.git"
+  },
+  "author": "Abhay Patil",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/abhaypatil87/jsDS/issues"
+  },
+  "homepage": "https://github.com/abhaypatil87/jsDS",
+  "dependencies": {
+    "yargs": "^6.6.0"
+  }
+}
