@@ -1,36 +1,97 @@
 /**
  * Created by abhaypatil on 9/12/14.
  */
-function binarySearchTree(init) {
+ var _ = require('lodash');
 
-    /*
-     * Note: Node has been declared with var so it's a private variable now.
-     * Same goes to the 'root' variable.
+ var BinarySearchTree = function() {
+     var _root = null;
+     var that = this;
+
+     this.getRoot = function() {
+         return _root;
+     };
+
+     this.setRoot = function (root) {
+       _root = root;
+     }
+
+     if (!_.isEmpty(arguments)) {
+       if (arguments.length === 1 && Array.isArray(arguments[0])) {
+         var flattened = arguments[0].reduce(function(first, second) {
+           return first.concat(second);
+         }, []);
+         flattened.forEach(function (argument) {
+           that.addNode(argument);
+         });
+       }  else {
+         throw new TypeError("Only one argument is allowed, of type array.", "binary_search_tree.js");
+       }
+     }
+ };
+
+ BinarySearchTree.prototype = {
+   /*
+    *
+    */
+     addNode: function (value) {
+        if (value === undefined || value === null ) {
+            throw new TypeError("Found undefined or null value.", "[addNode]binary_search_tree.js");
+        }
+
+        var node = {
+            value: value,
+            leftNode: null,
+            rightNode: null
+        };
+
+        var root = this.getRoot();
+        if (root === null) {
+           this.setRoot(node);
+           return;
+        }
+
+        var currentNode = root;
+        while (currentNode) {
+            if (value < currentNode.value) {
+                if (!currentNode.leftNode) {
+                    currentNode.leftNode = node;
+                    break;
+                } else {
+                    currentNode = currentNode.leftNode;
+                }
+            } else {
+                if (!currentNode.rightNode) {
+                    currentNode.rightNode = node;
+                    break;
+                } else {
+                    currentNode = currentNode.rightNode;
+                }
+            }
+        }
+     },
+
+     /*
+     *
      */
-    var Node = function(value) {
-        this.left_child = null;
-        this.right_child = null;
-        this.value = value;
-    };
+     preOrderTraverse: function() {
+        var stack = [],
+        item = null;
+        var root = this.getRoot();
+        stack.push(root);
 
-    var root = new Node(init);
+        while (stack.length !== 0) {
+            item = stack.pop();
+            console.log(item.value);
 
-    /*
-     * addNode can be accessed as a public method since it has been declared with 'this'
-     */
-    this.addNode = function(value) {
+            if (item.rightNode !== null) {
+                stack.push(item.rightNode);
+            }
 
-    };
-
-    this.traverse = function() {
-
-    };
-
-    this.removeNode = function(value) {
-
-    };
-
-    this.getRoot = function() {
-        return root;
+            if (item.leftNode !== null) {
+                stack.push(item.leftNode);
+            }
+        }
     }
 }
+
+module.exports = BinarySearchTree;
